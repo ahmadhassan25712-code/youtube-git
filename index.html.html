@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090914">
+<title>NEBULYX — Infinite Creative Universe</title>
+
+<style>
+:root{
+  --bg:#080811;
+  --panel:#121222;
+  --panel2:#19192d;
+  --text:#f8f7ff;
+  --muted:#a5a3bf;
+  --border:#ffffff19;
+  --pink:#ff4db8;
+  --purple:#a855f7;
+  --blue:#5488ff;
+  --cyan:#39e6f5;
+  --green:#56f0b0;
+  --yellow:#ffe66d;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse at 80% 0%,#54218c30,transparent 35%),
+    radial-gradient(ellipse at 0% 30%,#146c9b20,transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font:15px/1.6 Inter,Segoe UI,Arial,sans-serif;
+  min-height:100vh;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,
+textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--cyan);
+  outline-offset:3px;
+}
+a{color:inherit;text-decoration:none}
+button:disabled{opacity:.5;cursor:not-allowed}
+::selection{background:#a855f766;color:white}
+
+.topbar{
+  height:72px;
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  padding:0 25px;
+  background:#090914ed;
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.brand{
+  font-size:24px;
+  font-weight:950;
+  letter-spacing:1.5px;
+  white-space:nowrap;
+  background:linear-gradient(90deg,var(--pink),var(--purple),var(--blue),var(--cyan),var(--green));
+  background-size:250% 100%;
+  color:transparent;
+  background-clip:text;
+  animation:rainbow 8s linear infinite;
+}
+@keyframes rainbow{to{background-position:250% 0}}
+.top-actions{display:flex;align-items:center;gap:9px}
+.top-actions button{white-space:nowrap}
+
+.app{
+  display:grid;
+  grid-template-columns:245px minmax(0,1fr);
+  min-height:calc(100vh - 72px);
+}
+.sidebar{
+  position:sticky;
+  top:72px;
+  height:calc(100vh - 72px);
+  overflow-y:auto;
+  padding:18px 13px;
+  border-right:1px solid var(--border);
+  background:#0b0b17a8;
+}
+.nav-label{
+  padding:15px 11px 7px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.nav{
+  display:flex;
+  width:100%;
+  align-items:center;
+  gap:12px;
+  padding:11px 12px;
+  margin:3px 0;
+  border:1px solid transparent;
+  border-radius:11px;
+  color:var(--muted);
+  background:transparent;
+  text-align:left;
+  transition:.2s;
+}
+.nav:hover,.nav.active{
+  color:white;
+  border-color:#a855f737;
+  background:linear-gradient(100deg,#a855f729,#5488ff12);
+}
+.nav-icon{width:22px;text-align:center;font-size:17px}
+.nav .nav-tag{
+  margin-left:auto;
+  padding:2px 6px;
+  border-radius:5px;
+  font-size:9px;
+  background:#a855f735;
+  color:#d7b7ff;
+}
+.sidebar-bottom{
+  margin-top:25px;
+  padding:15px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:linear-gradient(145deg,#a855f71a,#5488ff0c);
+}
+.sidebar-bottom p{margin:5px 0;color:var(--muted);font-size:12px}
+
+main{
+  width:100%;
+  max-width:1700px;
+  min-width:0;
+  margin:0 auto;
+  padding:30px;
+}
+.page{animation:appear .25s ease}
+.page.hidden{display:none!important}
+@keyframes appear{
+  from{opacity:0;transform:translateY(5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.eyebrow{
+  color:var(--cyan);
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+h1,h2,h3,h4,p{margin-top:0}
+h1{
+  margin-bottom:15px;
+  font-size:clamp(34px,5vw,64px);
+  line-height:1.09;
+  letter-spacing:-2px;
+}
+h2{font-size:24px;line-height:1.25}
+h3{font-size:17px}
+.gradient-text{
+  color:transparent;
+  background:linear-gradient(90deg,var(--pink),#c18aff,var(--cyan),var(--green));
+  background-clip:text;
+}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:45px 35px;
+  border:1px solid var(--border);
+  border-radius:24px;
+  background:
+    radial-gradient(ellipse at 90% 10%,#a855f72b,transparent 40%),
+    radial-gradient(ellipse at 70% 100%,#32e6ff18,transparent 40%),
+    linear-gradient(125deg,#17142b,#101020 65%,#13132a);
+}
+.hero:after{
+  content:"✦";
+  position:absolute;
+  right:7%;
+  top:10%;
+  font-size:clamp(100px,18vw,220px);
+  color:#b18aff13;
+  pointer-events:none;
+}
+.hero p{max-width:610px;color:var(--muted);font-size:16px}
+.hero-content{position:relative;z-index:1}
+.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:11px 16px;
+  color:white;
+  background:linear-gradient(110deg,#a855f7,#526dff);
+  border:1px solid transparent;
+  border-radius:11px;
+  font-weight:750;
+  transition:transform .2s,filter .2s;
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.13)}
+.btn.secondary{background:#24243a;border-color:var(--border)}
+.btn.outline{background:transparent;border-color:#a855f777}
+.btn.danger{background:#922b4a}
+.btn.small{padding:6px 10px;font-size:12px}
+.icon-button{
+  display:inline-grid;
+  place-items:center;
+  width:39px;height:39px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  color:var(--text);
+  background:var(--panel2);
+}
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:16px;
+  margin:28px 0 16px;
+}
+.section-head h2{margin:0}
+.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:15px;
+}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+  min-width:0;
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:linear-gradient(145deg,var(--panel),#10101d);
+  box-shadow:0 10px 30px #0002;
+  transition:transform .2s,border-color .2s;
+}
+.card:hover{border-color:#a855f755}
+.card.interactive:hover{transform:translateY(-3px)}
+.card p{color:var(--muted);font-size:13px}
+.card h3{margin:12px 0 5px}
+.card-icon{
+  display:grid;
+  place-items:center;
+  width:47px;height:47px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#a855f733,#5488ff24);
+  font-size:24px;
+}
+.stat-number{font-size:31px;font-weight:900;line-height:1.25}
+.stat-label{font-size:12px;color:var(--muted)}
+.progress{
+  height:7px;
+  background:#34344b;
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0;
+}
+.progress-bar{
+  height:100%;width:0;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--pink),var(--purple),var(--blue),var(--cyan));
+  transition:width .3s;
+}
+.field{margin:12px 0}
+.field label{
+  display:block;
+  margin-bottom:6px;
+  color:#d5d2e9;
+  font-size:12px;
+  font-weight:750;
+}
+.input,textarea,select{
+  width:100%;
+  padding:12px 13px;
+  color:var(--text);
+  background:#0c0c19;
+  border:1px solid #37364f;
+  border-radius:10px;
+}
+textarea{min-height:115px;resize:vertical}
+select option{background:#151528;color:white}
+.input:focus,textarea:focus,select:focus{border-color:var(--purple)}
+.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:15px 0}
+.toolbar .input{flex:1;min-width:170px}
+.divider{height:1px;background:var(--border);margin:18px 0}
+.empty{
+  padding:30px 15px;
+  text-align:center;
+  border:1px dashed #ffffff26;
+  border-radius:13px;
+  color:var(--muted);
+}
+.empty .big{font-size:32px;margin-bottom:8px}
+.list-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+.list-row:last-child{border-bottom:0}
+.list-row .row-main{flex:1;min-width:0;overflow-wrap:anywhere}
+.list-row .row-main p{margin:3px 0 0;font-size:12px}
+.row-actions{display:flex;gap:5px;flex-wrap:wrap}
+.badge{
+  display:inline-block;
+  padding:3px 8px;
+  border-radius:7px;
+  font-size:10px;
+  font-weight:800;
+  color:var(--cyan);
+  background:#39e6f51b;
+}
+.badge.pink{color:#ff91cb;background:#ff4db81a}
+.badge.green{color:var(--green);background:#56f0b01b}
+.badge.yellow{color:var(--yellow);background:#ffe66d1a}
+.note-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.note-card{
+  padding:16px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--panel2);
+  overflow-wrap:anywhere;
+}
+.note-card p{white-space:pre-wrap}
+.color-palette{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.swatch{
+  min-height:125px;
+  display:flex;
+  justify-content:center;
+  align-items:end;
+  padding:10px 4px;
+  border:1px solid #ffffff30;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:850;
+  text-shadow:0 1px 5px #000;
+  cursor:pointer;
+}
+.result{
+  min-height:90px;
+  padding:16px;
+  margin-top:14px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#0c0c19;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.toast{
+  display:none;
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:100;
+  max-width:calc(100vw - 40px);
+  padding:13px 18px;
+  border:1px solid #ffffff25;
+  border-radius:12px;
+  background:#25243c;
+  box-shadow:0 12px 35px #0008;
+}
+.toast.show{display:block;animation:appear .2s ease}
+body.light{
+  --bg:#f3f3fb;--panel:#fff;--panel2:#eeeefa;
+  --text:#19192e;--muted:#65657f;--border:#18182b20;
+}
+body.light .topbar{background:#f3f3fbee}
+body.light .sidebar{background:#eeedf8}
+body.light .hero{background:linear-gradient(120deg,#fff,#f1eaff)}
+body.light .input,body.light textarea,body.light select,
+body.light .result{background:white;color:#19192e}
+body.light .field label{color:#373750}
+@media(max-width:1100px){
+  .grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app{grid-template-columns:215px minmax(0,1fr)}
+}
+@media(max-width:800px){
+  .app{grid-template-columns:1fr}
+  .sidebar{
+    position:sticky;top:72px;
+    height:auto;max-height:none;
+    display:flex;overflow-x:auto;
+    gap:5px;padding:8px;
+    background:#0b0b17f5;
+    z-index:15;
+    border-right:0;border-bottom:1px solid var(--border);
+  }
+  .nav-label,.sidebar-bottom{display:none}
+  .nav{width:auto;flex-shrink:0;white-space:nowrap;margin:0;padding:9px 11px}
+  main{padding:20px}
+}
+@media(max-width:600px){
+  .topbar{height:62px;padding:0 12px}
+  .brand{font-size:19px}
+  .top-actions .btn{padding:8px;font-size:12px}
+  .app{min-height:calc(100vh - 62px)}
+  .sidebar{top:62px}
+  main{padding:14px}
+  .hero{padding:30px 20px}
+  h1{letter-spacing:-1px}
+  .grid,.grid.two,.grid.four,.note-grid{grid-template-columns:1fr}
+  .color-palette{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .section-head{align-items:start;flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#" onclick="showPage('home');return false">✦ NEBULYX</a>
+  <div class="top-actions">
+    <button class="btn secondary" onclick="toggleTheme()">☼ Theme</button>
+    <button class="btn" onclick="showPage('builder')">＋ Create</button>
+  </div>
+</header>
+
+<div class="app">
+<aside class="sidebar">
+  <div class="nav-label">Main workspace</div>
+  <button class="nav active" data-page="home" onclick="showPage('home')"><span class="nav-icon">⌂</span>Dashboard</button>
+  <button class="nav" data-page="projects" onclick="showPage('projects')"><span class="nav-icon">▣</span>Projects</button>
+  <button class="nav" data-page="builder" onclick="showPage('builder')"><span class="nav-icon">✧</span>Website Builder</button>
+  <button class="nav" data-page="tasks" onclick="showPage('tasks')"><span class="nav-icon">☑</span>Tasks</button>
+  <button class="nav" data-page="notes" onclick="showPage('notes')"><span class="nav-icon">▤</span>Notes</button>
+  <button class="nav" data-page="focus" onclick="showPage('focus')"><span class="nav-icon">◷</span>Focus Timer</button>
+
+  <div class="nav-label">Creative studio</div>
+  <button class="nav" data-page="colors" onclick="showPage('colors')"><span class="nav-icon">🌈</span>Rainbow Color Lab</button>
+  <button class="nav" data-page="prompts" onclick="showPage('prompts')"><span class="nav-icon">✦</span>Prompt Studio</button>
+  <button class="nav" data-page="code" onclick="showPage('code')"><span class="nav-icon">⌘</span>Code Pad</button>
+  <button class="nav" data-page="calculator" onclick="showPage('calculator')"><span class="nav-icon">＋</span>Calculator</button>
+
+  <div class="nav-label">Personal growth</div>
+  <button class="nav" data-page="habits" onclick="showPage('habits')"><span class="nav-icon">✓</span>Habit Tracker</button>
+  <button class="nav" data-page="journal" onclick="showPage('journal')"><span class="nav-icon">✎</span>Daily Journal</button>
+  <button class="nav" data-page="settings" onclick="showPage('settings')"><span class="nav-icon">⚙</span>Settings</button>
+
+  <div class="sidebar-bottom">
+    <strong>✦ Your universe</strong>
+    <p>Build ideas, organize your work and make progress one step at a time.</p>
+    <span class="badge">LOCAL WORKSPACE</span>
+  </div>
+</aside>
+
+<main>
+
+<!-- DASHBOARD -->
+<section class="page" id="page-home">
+  <div class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">✦ WELCOME TO YOUR CREATIVE UNIVERSE</div>
+      <h1>Think bigger.<br><span class="gradient-text">Build beyond.</span></h1>
+      <p>Your personal command center for projects, creative tools, planning, coding and everyday progress.</p>
+      <div class="button-row">
+        <button class="btn" onclick="showPage('builder')">🚀 Build a website</button>
+        <button class="btn secondary" onclick="showPage('prompts')">✦ Open Prompt Studio</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <div><h2>Your workspace</h2><p>Everything important, one place.</p></div>
+    <span class="badge green">READY TO CREATE</span>
+  </div>
+
+  <div class="grid four">
+    <article class="card">
+      <div class="card-icon">▣</div><h3>Projects</h3>
+      <div class="stat-number" id="statProjects">0</div>
+      <div class="stat-label">Saved projects</div>
+    </article>
+    <article class="card">
+      <div class="card-icon">☑</div><h3>Tasks</h3>
+      <div class="stat-number" id="statTasks">0/0</div>
+      <div class="stat-label">Completed tasks</div>
+      <div class="progress"><div class="progress-bar" id="taskProgress"></div></div>
+    </article>
+    <article class="card">
+      <div class="card-icon">▤</div><h3>Notes</h3>
+      <div class="stat-number" id="statNotes">0</div>
+      <div class="stat-label">Saved notes</div>
+    </article>
+    <article class="card">
+      <div class="card-icon">✓</div><h3>Habits</h3>
+      <div class="stat-number" id="statHabits">0</div>
+      <div class="stat-label">Habits to track</div>
+    </article>
+  </div>
+
+  <div class="section-head">
+    <div><h2>Launch a tool</h2><p>Jump straight into your next task.</p></div>
+  </div>
+
+  <div class="grid">
+    <article class="card interactive">
+      <div class="card-icon">🌈</div><h3>Rainbow Color Lab</h3>
+      <p>Build colorful palettes, copy HEX codes and preview gradients.</p>
+      <button class="btn secondary" onclick="showPage('colors')">Open Color Lab →</button>
+    </article>
+    <article class="card interactive">
+      <div class="card-icon">⌘</div><h3>Code Pad</h3>
+      <p>Write HTML, CSS and JavaScript, then preview your page locally.</p>
+      <button class="btn secondary" onclick="showPage('code')">Open Code Pad →</button>
+    </article>
+    <article class="card interactive">
+      <div class="card-icon">◷</div><h3>Focus Timer</h3>
+      <p>Set a focus session and keep your attention on one task.</p>
+      <button class="btn secondary" onclick="showPage('focus')">Start focusing →</button>
+    </article>
+  </div>
+
+  <div class="section-head"><div><h2>Quick actions</h2><p>Capture ideas before they disappear.</p></div></div>
+  <div class="card">
+    <div class="button-row" style="margin-top:0">
+      <button class="btn secondary" onclick="quickNote()">＋ Quick note</button>
+      <button class="btn secondary" onclick="showPage('tasks')">＋ Add task</button>
+      <button class="btn secondary" onclick="showPage('projects')">＋ New project</button>
+      <button class="btn secondary" onclick="showPage('journal')">✎ Write journal</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="page hidden" id="page-projects">
+  <div class="eyebrow">YOUR WORK</div>
+  <h1>Project <span class="gradient-text">Universe</span></h1>
+  <p class="muted">Keep your ideas organized from first thought to finished project.</p>
+  <div class="card">
+    <h2>Create a project</h2>
+    <div class="field"><label for="projectName">Project name</label><input class="input" id="projectName" placeholder="e.g. My next big idea"></div>
+    <div class="field"><label for="projectDescription">Description</label><textarea id="projectDescription" placeholder="What are you planning to build?"></textarea></div>
+    <div class="field"><label for="projectStatus">Status</label><select id="projectStatus"><option>Planning</option><option>In progress</option><option>On hold</option><option>Completed</option></select></div>
+    <button class="btn" onclick="addProject()">＋ Save project</button>
+  </div>
+  <div class="section-head"><div><h2>Your projects</h2><p id="projectSubtitle">Your saved work appears here.</p></div></div>
+  <div id="projectList" class="grid"></div>
+</section>
+
+<!-- WEBSITE BUILDER -->
+<section class="page hidden" id="page-builder">
+  <div class="eyebrow">CREATIVE STUDIO</div>
+  <h1>Website <span class="gradient-text">Builder</span></h1>
+  <p class="muted">Create a simple HTML page and preview it in your browser.</p>
+  <div class="grid two">
+    <div class="card">
+      <h2>Customize your page</h2>
+      <div class="field"><label for="siteTitle">Website title</label><input class="input" id="siteTitle" value="My Creative World"></div>
+      <div class="field"><label for="siteSubtitle">Headline</label><input class="input" id="siteSubtitle" value="Ideas become reality."></div>
+      <div class="field"><label for="siteDescription">Description</label><textarea id="siteDescription">Welcome to my new website. This is where creativity begins.</textarea></div>
+      <div class="field"><label for="siteColor">Accent color</label><input class="input" id="siteColor" type="color" value="#a855f7"></div>
+      <button class="btn" onclick="buildWebsite()">Generate preview</button>
+      <button class="btn secondary" onclick="downloadWebsite()">Download HTML</button>
+    </div>
+    <div class="card">
+      <h2>Live preview</h2>
+      <div id="websitePreview" class="result">Click “Generate preview” to build your page.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TASKS -->
+<section class="page hidden" id="page-tasks">
+  <div class="eyebrow">DAILY PRODUCTIVITY</div>
+  <h1>Task <span class="gradient-text">Command</span></h1>
+  <p class="muted">Break your goals into small steps and track what you finish.</p>
+  <div class="card">
+    <h2>Add a task</h2>
+    <div class="field"><label for="taskInput">Task description</label><input class="input" id="taskInput" placeholder="What needs to be done?"></div>
+    <div class="grid two">
+      <div class="field"><label for="taskPriority">Priority</label><select id="taskPriority"><option>Normal</option><option>High</option><option>Low</option></select></div>
+      <div class="field"><label for="taskDate">Due date (optional)</label><input class="input" id="taskDate" type="date"></div>
+    </div>
+    <button class="btn" onclick="addTask()">＋ Add task</button>
+  </div>
+  <div class="section-head"><div><h2>Your task list</h2><p>Check off completed tasks.</p></div></div>
+  <div class="card"><div id="taskList"></div></div>
+</section>
+
+<!-- NOTES -->
+<section class="page hidden" id="page-notes">
+  <div class="eyebrow">YOUR SECOND BRAIN</div>
+  <h1>Notes & <span class="gradient-text">Ideas</span></h1>
+  <p class="muted">Save thoughts, reminders, links and inspiration in your browser.</p>
+  <div class="card">
+    <div class="field"><label for="noteTitle">Title</label><input class="input" id="noteTitle" placeholder="Give your note a title"></div>
+    <div class="field"><label for="noteContent">Content</label><textarea id="noteContent" placeholder="Write anything you want to remember..."></textarea></div>
+    <button class="btn" onclick="addNote()">＋ Save note</button>
+  </div>
+  <div class="section-head"><div><h2>Saved notes</h2><p>Your ideas stay in this browser.</p></div></div>
+  <div id="noteList" class="note-grid"></div>
+</section>
+
+<!-- FOCUS TIMER -->
+<section class="page hidden" id="page-focus">
+  <div class="eyebrow">DEEP WORK MODE</div>
+  <h1>Focus <span class="gradient-text">Zone</span></h1>
+  <p class="muted">Pick one task. Give it your attention. Make progress.</p>
+  <div class="card" style="max-width:650px;margin:20px auto;text-align:center">
+    <div class="field"><label for="focusMinutes">Session length (minutes)</label><input class="input" id="focusMinutes" type="number" min="1" max="180" value="25"></div>
+    <div id="focusClock" style="font-size:clamp(52px,10vw,85px);font-weight:900;letter-spacing:3px">25:00</div>
+    <p id="focusStatus" class="muted">Ready when you are.</p>
+    <div class="button-row" style="justify-content:center">
+      <button class="btn" id="focusStart" onclick="startFocus()">▶ Start</button>
+      <button class="btn secondary" onclick="pauseFocus()">Ⅱ Pause</button>
+      <button class="btn secondary" onclick="resetFocus()">↺ Reset</button>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR LAB -->
+<section class="page hidden" id="page-colors">
+  <div class="eyebrow">COLOR EXPLORATION</div>
+  <h1>Rainbow <span class="gradient-text">Color Lab</span></h1>
+  <p class="muted">Generate palettes, copy color codes and create a custom gradient.</p>
+  <div class="card">
+    <div class="toolbar">
+      <button class="btn" onclick="generatePalette()">🎲 Generate palette</button>
+      <button class="btn secondary" onclick="copyPalette()">Copy all HEX codes</button>
+    </div>
+    <div id="colorPalette" class="color-palette"></div>
+    <div class="divider"></div>
+    <h2>Gradient creator</h2>
+    <div class="grid two">
+      <div class="field"><label for="gradientOne">First color</label><input class="input" type="color" id="gradientOne" value="#ff4db8"></div>
+      <div class="field"><label for="gradientTwo">Second color</label><input class="input" type="color" id="gradientTwo" value="#5488ff"></div>
+    </div>
+    <div id="gradientPreview" style="height:150px;border-radius:14px;background:linear-gradient(110deg,#ff4db8,#5488ff);border:1px solid var(--border)"></div>
+    <div class="toolbar"><button class="btn secondary" onclick="updateGradient()">Update gradient</button><button class="btn secondary" onclick="copyGradient()">Copy CSS</button></div>
+    <div id="gradientCode" class="result">background: linear-gradient(110deg, #ff4db8, #5488ff);</div>
+  </div>
+</section>
+
+<!-- PROMPT STUDIO -->
+<section class="page hidden" id="page-prompts">
+  <div class="eyebrow">CREATIVE PROMPT WORKSHOP</div>
+  <h1>Prompt <span class="gradient-text">Studio</span></h1>
+  <p class="muted">Turn a rough idea into a structured prompt for an AI tool.</p>
+  <div class="card">
+    <div class="field"><label for="promptRole">AI role</label><select id="promptRole"><option>Expert web developer</option><option>Creative designer</option><option>Business strategist</option><option>Content writer</option><option>Teacher and tutor</option><option>Productivity coach</option><option>Research assistant</option></select></div>
+    <div class="field"><label for="promptGoal">What do you want to achieve?</label><textarea id="promptGoal" placeholder="Describe your goal in your own words..."></textarea></div>
+    <div class="field"><label for="promptStyle">Style and tone</label><select id="promptStyle"><option>Clear and professional</option><option>Creative and imaginative</option><option>Simple for beginners</option><option>Detailed and technical</option><option>Bold and futuristic</option></select></div>
+    <div class="field"><label for="promptFormat">Desired output</label><select id="promptFormat"><option>Step-by-step guide</option><option>Complete code</option><option>Detailed plan</option><option>Bullet-point list</option><option>Table</option><option>Creative draft</option></select></div>
+    <button class="btn" onclick="createPrompt()">✦ Build my prompt</button>
+    <div id="promptResult" class="result">Your structured prompt will appear here.</div>
+    <div class="toolbar"><button class="btn secondary" onclick="copyPrompt()">Copy prompt</button></div>
+    <p class="small muted">This creates a prompt template locally. It does not call an AI model by itself.</p>
+  </div>
+</section>
+
+<!-- CODE PAD -->
+<section class="page hidden" id="page-code">
+  <div class="eyebrow">DEVELOPER WORKSPACE</div>
+  <h1>Code <span class="gradient-text">Pad</span></h1>
+  <p class="muted">Write a small HTML page and preview it safely in a separate sandboxed frame.</p>
+  <div class="card">
+    <div class="field"><label for="codeEditor">HTML, CSS and JavaScript</label><textarea id="codeEditor" style="min-height:300px;font-family:Consolas,monospace;font-size:13px" spellcheck="false"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Page</title>
+<style>
+body{font-family:Arial;text-align:center;padding:50px;background:#101020;color:white}
+h1{color:#b18aff}
+</style>
+</head>
+<body>
+<h1>Hello, NEBULYX!</h1>
+<p>Your next idea starts here.</p>
+</body>
+</html></textarea></div>
+    <div class="toolbar">
+      <button class="btn" onclick="previewCode()">▶ Run preview</button>
+      <button class="btn secondary" onclick="downloadCode()">↓ Download HTML</button>
+      <button class="btn secondary" onclick="resetCode()">↺ Reset example</button>
+    </div>
+    <div class="field"><label>Preview</label><iframe id="codePreview" title="Your HTML preview" sandbox="allow-scripts" style="width:100%;height:400px;background:white;border:1px solid var(--border);border-radius:12px"></iframe></div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="page hidden" id="page-calculator">
+  <div class="eyebrow">QUICK UTILITIES</div>
+  <h1>Smart <span class="gradient-text">Calculator</span></h1>
+  <p class="muted">A simple calculator for everyday arithmetic.</p>
+  <div class="card" style="max-width:420px">
+    <input id="calcDisplay" class="input" value="0" readonly aria-label="Calculator display">
+    <div id="calcButtons" class="grid two" style="grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px"></div>
+    <p class="small muted" style="margin-top:14px">Keyboard input is supported while this page is open.</p>
+  </div>
+</section>
+
+<!-- HABITS -->
+<section class="page hidden" id="page-habits">
+  <div class="eyebrow">SMALL STEPS, BIG CHANGE</div>
+  <h1>Habit <span class="gradient-text">Tracker</span></h1>
+  <p class="muted">Create daily habits and check them off as you complete them.</p>
+  <div class="card">
+    <div class="field"><label for="habitName">New habit</label><input class="input" id="habitName" placeholder="e.g. Read for 15 minutes"></div>
+    <button class="btn" onclick="addHabit()">＋ Add habit</button>
+    <div class="section-head"><div><h2>Today's habits</h2><p id="habitDate"></p></div></div>
+    <div id="habitList"></div>
+  </div>
+</section>
+
+<!-- JOURNAL -->
+<section class="page hidden" id="page-journal">
+  <div class="eyebrow">PERSONAL REFLECTION</div>
+  <h1>Daily <span class="gradient-text">Journal</span></h1>
+  <p class="muted">Write down what happened, what you learned and what you want to do next.</p>
+  <div class="card">
+    <div class="field"><label for="journalMood">How are you feeling today?</label><select id="journalMood"><option>😊 Good</option><option>⚡ Energized</option><option>😌 Calm</option><option>🤔 Thoughtful</option><option>😓 Stressed</option><option>😴 Tired</option></select></div>
+    <div class="field"><label for="journalText">Today's reflection</label><textarea id="journalText" style="min-height:180px" placeholder="What went well today? What did you learn? What is one thing you want to improve?"></textarea></div>
+    <button class="btn" onclick="saveJournal()">Save today's entry</button>
+    <div class="section-head"><div><h2>Past entries</h2></div></div>
+    <div id="journalList"></div>
+  </div>
+</section>
+
+<!-- SETTINGS -->
+<section class="page hidden" id="page-settings">
+  <div class="eyebrow">YOUR EXPERIENCE</div>
+  <h1>Workspace <span class="gradient-text">Settings</span></h1>
+  <p class="muted">Control your local workspace and manage your stored information.</p>
+  <div class="grid two">
+    <div class="card">
+      <h2>Appearance</h2>
+      <p>Switch between the default dark workspace and a light theme.</p>
+      <button class="btn" onclick="toggleTheme()">☼ Toggle theme</button>
+    </div>
+    <div class="card">
+      <h2>Data and privacy</h2>
+      <p>Your projects, tasks and notes are stored locally in this browser. They are not automatically synced to other devices.</p>
+      <button class="btn secondary" onclick="exportData()">↓ Export workspace JSON</button>
+      <div class="divider"></div>
+      <button class="btn danger" onclick="clearWorkspace()">Delete local workspace data</button>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:35px 10px;text-align:center;color:var(--muted);font-size:12px">
+  ✦ NEBULYX — Your universe, your ideas, your next move.
+</footer>
+
+</main>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+/* NEBULYX — PART 2/3
+   Navigation, storage, projects, tasks and notes
+*/
+
+const $ = (id) => document.getElementById(id);
+
+const DB_KEY = "nebulux_workspace_v1";
+
+const defaultData = {
+  projects: [],
+  tasks: [],
+  notes: [],
+  habits: [],
+  journal: [],
+  theme: "dark"
+};
+
+function loadData() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(DB_KEY) || "null");
+    return saved && typeof saved === "object"
+      ? { ...defaultData, ...saved }
+      : { ...defaultData };
+  } catch {
+    return { ...defaultData };
+  }
+}
+
+let appData = loadData();
+
+function saveData() {
+  try {
+    localStorage.setItem(DB_KEY, JSON.stringify(appData));
+  } catch (error) {
+    console.error("Workspace save failed:", error);
+    showToast("Data save nahi ho saka.");
+  }
+}
+
+function makeId() {
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2, 9);
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function showToast(message) {
+  const toast = $("toast");
+  if (!toast) {
+    console.log(message);
+    return;
+  }
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2600);
+}
+
+/* PAGE NAVIGATION */
+
+function showPage(pageName) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.add("hidden");
+  });
+
+  const selectedPage = $("page-" + pageName);
+
+  if (selectedPage) {
+    selectedPage.classList.remove("hidden");
+  } else {
+    showToast("Yeh page nahi mila.");
+    return;
+  }
+
+  document.querySelectorAll(".nav").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.page === pageName ||
+      button.getAttribute("onclick")?.includes(
+        "'" + pageName + "'"
+      )
+    );
+  });
+
+  const pageTitles = {
+    home: "Dashboard",
+    projects: "Projects",
+    builder: "Website Builder",
+    tasks: "Tasks",
+    notes: "Notes",
+    focus: "Focus Timer",
+    colors: "Color Lab",
+    prompts: "Prompt Studio",
+    code: "Code Playground",
+    calculator: "Calculator",
+    habits: "Habit Tracker",
+    journal: "Daily Journal",
+    settings: "Settings"
+  };
+
+  const heading = $("pageHeading");
+  if (heading) {
+    heading.textContent = pageTitles[pageName] || "NEBULYX";
+  }
+
+  try {
+    history.replaceState(null, "", "#" + pageName);
+  } catch {}
+
+  if (pageName === "home") updateDashboard();
+}
+
+function toggleTheme() {
+  const root = document.documentElement;
+  const currentlyLight =
+    root.getAttribute("data-theme") === "light";
+
+  root.setAttribute(
+    "data-theme",
+    currentlyLight ? "dark" : "light"
+  );
+
+  appData.theme = currentlyLight ? "dark" : "light";
+  saveData();
+  showToast(
+    currentlyLight ? "Dark theme enabled" : "Light theme enabled"
+  );
+}
+
+function applySavedTheme() {
+  document.documentElement.setAttribute(
+    "data-theme",
+    appData.theme === "light" ? "light" : "dark"
+  );
+}
+
+/* DASHBOARD */
+
+function updateDashboard() {
+  const completedTasks = appData.tasks.filter(t => t.done).length;
+  const totalTasks = appData.tasks.length;
+  const progress = totalTasks
+    ? Math.round((completedTasks / totalTasks) * 100)
+    : 0;
+
+  if ($("statProjects")) {
+    $("statProjects").textContent = appData.projects.length;
+  }
+
+  if ($("statTasks")) {
+    $("statTasks").textContent = totalTasks;
+  }
+
+  if ($("taskProgress")) {
+    $("taskProgress").textContent = progress + "%";
+  }
+
+  if ($("statNotes")) {
+    $("statNotes").textContent = appData.notes.length;
+  }
+
+  if ($("statHabits")) {
+    $("statHabits").textContent = appData.habits.length;
+  }
+
+  renderProjects();
+  renderTasks();
+  renderNotes();
+  renderHabits();
+  renderJournal();
+}
+
+/* PROJECTS */
+
+function addProject() {
+  const name = $("projectName")?.value.trim();
+  const description =
+    $("projectDescription")?.value.trim() || "";
+  const status = $("projectStatus")?.value || "Planning";
+
+  if (!name) {
+    showToast("Project ka naam likho.");
+    $("projectName")?.focus();
+    return;
+  }
+
+  appData.projects.unshift({
+    id: makeId(),
+    name,
+    description,
+    status,
+    createdAt: new Date().toISOString()
+  });
+
+  saveData();
+
+  $("projectName").value = "";
+  if ($("projectDescription")) {
+    $("projectDescription").value = "";
+  }
+
+  renderProjects();
+  updateDashboard();
+  showToast("Project add ho gaya!");
+}
+
+function deleteProject(id) {
+  appData.projects = appData.projects.filter(p => p.id !== id);
+  saveData();
+  renderProjects();
+  updateDashboard();
+  showToast("Project delete ho gaya.");
+}
+
+function renderProjects() {
+  const list = $("projectList");
+  if (!list) return;
+
+  if (!appData.projects.length) {
+    list.innerHTML =
+      '<div class="empty-state">Abhi koi project nahi. Apna pehla project add karo.</div>';
+    return;
+  }
+
+  list.innerHTML = appData.projects.map(project => `
+    <article class="item-card">
+      <div class="item-main">
+        <h3>${escapeHTML(project.name)}</h3>
+        <p>${escapeHTML(project.description || "No description")}</p>
+        <small>${escapeHTML(project.status)}</small>
+      </div>
+      <button class="btn btn-danger"
+        data-delete-project="${escapeHTML(project.id)}"
+        type="button">Delete</button>
+    </article>
+  `).join("");
+
+  list.querySelectorAll("[data-delete-project]").forEach(button => {
+    button.addEventListener("click", () => {
+      deleteProject(button.dataset.deleteProject);
+    });
+  });
+
+  if ($("projectSubtitle")) {
+    $("projectSubtitle").textContent =
+      `${appData.projects.length} project(s)`;
+  }
+}
+
+/* TASKS */
+
+function addTask() {
+  const input = $("taskInput");
+  const title = input?.value.trim();
+
+  if (!title) {
+    showToast("Task ka naam likho.");
+    input?.focus();
+    return;
+  }
+
+  appData.tasks.unshift({
+    id: makeId(),
+    title,
+    priority: $("taskPriority")?.value || "Medium",
+    dueDate: $("taskDate")?.value || "",
+    done: false,
+    createdAt: new Date().toISOString()
+  });
+
+  saveData();
+  input.value = "";
+  renderTasks();
+  updateDashboard();
+  showToast("Task add ho gaya!");
+}
+
+function toggleTask(id) {
+  const task = appData.tasks.find(t => t.id === id);
+  if (!task) return;
+
+  task.done = !task.done;
+  saveData();
+  renderTasks();
+  updateDashboard();
+}
+
+function deleteTask(id) {
+  appData.tasks = appData.tasks.filter(t => t.id !== id);
+  saveData();
+  renderTasks();
+  updateDashboard();
+  showToast("Task delete ho gaya.");
+}
+
+function renderTasks() {
+  const list = $("taskList");
+  if (!list) return;
+
+  if (!appData.tasks.length) {
+    list.innerHTML =
+      '<div class="empty-state">Tasks khali hain. Pehla task add karo!</div>';
+    return;
+  }
+
+  list.innerHTML = appData.tasks.map(task => `
+    <article class="item-card ${task.done ? "completed" : ""}">
+      <input type="checkbox"
+        aria-label="Complete task"
+        data-toggle-task="${escapeHTML(task.id)}"
+        ${task.done ? "checked" : ""}>
+      <div class="item-main">
+        <h3>${escapeHTML(task.title)}</h3>
+        <p>
+          Priority: ${escapeHTML(task.priority)}
+          ${task.dueDate
+            ? " · Due: " + escapeHTML(task.dueDate)
+            : ""}
+        </p>
+      </div>
+      <button class="btn btn-danger"
+        type="button"
+        data-delete-task="${escapeHTML(task.id)}">Delete</button>
+    </article>
+  `).join("");
+
+  list.querySelectorAll("[data-toggle-task]").forEach(input => {
+    input.addEventListener("change", () => {
+      toggleTask(input.dataset.toggleTask);
+    });
+  });
+
+  list.querySelectorAll("[data-delete-task]").forEach(button => {
+    button.addEventListener("click", () => {
+      deleteTask(button.dataset.deleteTask);
+    });
+  });
+}
+
+/* NOTES */
+
+function addNote() {
+  const titleInput = $("noteTitle");
+  const contentInput = $("noteContent");
+
+  const title = titleInput?.value.trim();
+  const content = contentInput?.value.trim();
+
+  if (!title && !content) {
+    showToast("Note ka title ya content likho.");
+    titleInput?.focus();
+    return;
+  }
+
+  appData.notes.unshift({
+    id: makeId(),
+    title: title || "Untitled Note",
+    content: content || "",
+    createdAt: new Date().toISOString()
+  });
+
+  saveData();
+
+  if (titleInput) titleInput.value = "";
+  if (contentInput) contentInput.value = "";
+
+  renderNotes();
+  updateDashboard();
+  showToast("Note save ho gaya!");
+}
+
+function quickNote() {
+  showPage("notes");
+  setTimeout(() => $("noteTitle")?.focus(), 0);
+}
+
+function deleteNote(id) {
+  appData.notes = appData.notes.filter(n => n.id !== id);
+  saveData();
+  renderNotes();
+  updateDashboard();
+  showToast("Note delete ho gaya.");
+}
+
+function renderNotes() {
+  const list = $("noteList");
+  if (!list) return;
+
+  if (!appData.notes.length) {
+    list.innerHTML =
+      '<div class="empty-state">Abhi koi note nahi likha gaya.</div>';
+    return;
+  }
+
+  list.innerHTML = appData.notes.map(note => `
+    <article class="item-card">
+      <div class="item-main">
+        <h3>${escapeHTML(note.title)}</h3>
+        <p class="note-content">${escapeHTML(note.content)}</p>
+        <small>${escapeHTML(
+          new Date(note.createdAt).toLocaleString()
+        )}</small>
+      </div>
+      <button class="btn btn-danger"
+        type="button"
+        data-delete-note="${escapeHTML(note.id)}">Delete</button>
+    </article>
+  `).join("");
+
+  list.querySelectorAll("[data-delete-note]").forEach(button => {
+    button.addEventListener("click", () => {
+      deleteNote(button.dataset.deleteNote);
+    });
+  });
+}
+
+/* ENTER KEY SHORTCUTS */
+
+$("taskInput")?.addEventListener("keydown", event => {
+  if (event.key === "Enter") addTask();
+});
+
+$("projectName")?.addEventListener("keydown", event => {
+  if (event.key === "Enter") addProject();
+});
+
+/* INITIAL RENDER */
+
+function initializePartTwo() {
+  applySavedTheme();
+  renderProjects();
+  renderTasks();
+  renderNotes();
+  renderHabits();
+  renderJournal();
+  updateDashboard();
+
+  const initialPage = location.hash.slice(1);
+  if (initialPage && $("page-" + initialPage)) {
+    showPage(initialPage);
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializePartTwo);
+} else {
+  initializePartTwo();
+}
+</script>
+<script>
+"use strict";
+
+/* ==========================================
+   NEBULYX — PART 3/3
+   Builder, Color Lab, Prompts, Code, Timer,
+   Calculator, Habits, Journal and Settings
+========================================== */
+
+/* SMALL HELPERS */
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function downloadText(filename, content, type = "text/plain") {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+async function copyText(value) {
+  try {
+    await navigator.clipboard.writeText(String(value));
+    showToast("Copied!");
+  } catch {
+    const area = document.createElement("textarea");
+    area.value = String(value);
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+
+    try {
+      document.execCommand("copy");
+      showToast("Copied!");
+    } catch {
+      showToast("Copy nahi hua. Text manually copy karo.");
+    }
+
+    area.remove();
+  }
+}
+
+/* ==========================================
+   WEBSITE BUILDER
+========================================== */
+
+function buildWebsite() {
+  const title =
+    $("siteTitle")?.value.trim() || "My Amazing Website";
+
+  const subtitle =
+    $("siteSubtitle")?.value.trim() || "Ideas become reality.";
+
+  const description =
+    $("siteDescription")?.value.trim() ||
+    "Welcome to my new website.";
+
+  const color = $("siteColor")?.value || "#8b5cf6";
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHTML(title)}</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0b1020;color:white}
+header{padding:22px 8%;display:flex;justify-content:space-between;
+align-items:center;border-bottom:1px solid #ffffff22}
+.brand{font-weight:800;font-size:24px;color:${color}}
+nav a{color:white;text-decoration:none;margin-left:18px}
+.hero{min-height:70vh;display:grid;place-items:center;text-align:center;
+padding:70px 20px;background:radial-gradient(circle at top,${color}55,transparent 65%)}
+h1{font-size:clamp(38px,7vw,76px);margin:0 0 18px}
+p{line-height:1.8;color:#cbd5e1}
+.hero p{max-width:650px;margin:0 auto 28px}
+.btn{display:inline-block;background:${color};color:white;
+padding:13px 22px;border-radius:10px;text-decoration:none;font-weight:bold}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;padding:45px 8%}
+.card{background:#151d32;border:1px solid #ffffff18;
+border-radius:18px;padding:25px}
+footer{text-align:center;padding:30px;color:#94a3b8}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">${escapeHTML(title)}</div>
+<nav><a href="#home">Home</a><a href="#features">Features</a><a href="#about">About</a></nav>
+</header>
+<section class="hero" id="home">
+<div>
+<h1>${escapeHTML(title)}</h1>
+<p>${escapeHTML(subtitle)} ${escapeHTML(description)}</p>
+<a class="btn" href="#features">Explore More</a>
+</div>
+</section>
+<section class="cards" id="features">
+<article class="card"><h2>🚀 Innovation</h2><p>Bring your ideas to life.</p></article>
+<article class="card"><h2>🎨 Creativity</h2><p>Build something unique.</p></article>
+<article class="card"><h2>⚡ Performance</h2><p>A responsive design for modern screens.</p></article>
+</section>
+<footer id="about">Made with creativity · ${new Date().getFullYear()}</footer>
+</body>
+</html>`;
+
+  window.nebuluxGeneratedHTML = html;
+
+  const preview = $("websitePreview");
+  if (preview) {
+    if (preview.tagName === "IFRAME") {
+      preview.srcdoc = html;
+    } else {
+      preview.innerHTML = `
+        <div style="padding:20px;border-radius:14px;background:#0b1020;color:white">
+          <div style="color:${escapeHTML(color)};font-weight:bold">
+            ${escapeHTML(title)}
+          </div>
+          <h2>${escapeHTML(subtitle)}</h2>
+          <p>${escapeHTML(description)}</p>
+          <p>🚀 Innovation · 🎨 Creativity · ⚡ Performance</p>
+        </div>`;
+    }
+  }
+
+  showToast("Website preview ready!");
+}
+
+function downloadWebsite() {
+  if (!window.nebuluxGeneratedHTML) buildWebsite();
+
+  downloadText(
+    "nebulux-website.html",
+    window.nebuluxGeneratedHTML,
+    "text/html;charset=utf-8"
+  );
+}
+
+/* ==========================================
+   FOCUS TIMER
+========================================== */
+
+let focusRemaining = 25 * 60;
+let focusInterval = null;
+let focusRunning = false;
+
+function formatClock(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+
+  return String(minutes).padStart(2, "0") + ":" +
+    String(secs).padStart(2, "0");
+}
+
+function updateFocusDisplay() {
+  setText("focusClock", formatClock(focusRemaining));
+
+  if ($("focusStatus")) {
+    $("focusStatus").textContent = focusRunning
+      ? "Focus session in progress"
+      : focusRemaining <= 0
+        ? "Session complete!"
+        : "Ready when you are";
+  }
+
+  const minutesInput = $("focusMinutes");
+  if (minutesInput && !focusRunning && focusRemaining === 25 * 60) {
+    // Keep the initial input editable.
+  }
+}
+
+function startFocus() {
+  if (focusRunning) return;
+
+  if (focusRemaining <= 0) {
+    const minutes = Math.max(
+      1,
+      Math.min(180, Number($("focusMinutes")?.value) || 25)
+    );
+    focusRemaining = Math.round(minutes * 60);
+  }
+
+  if (focusRemaining === 25 * 60 && $("focusMinutes")) {
+    const minutes = Math.max(
+      1,
+      Math.min(180, Number($("focusMinutes").value) || 25)
+    );
+    focusRemaining = Math.round(minutes * 60);
+  }
+
+  focusRunning = true;
+
+  focusInterval = setInterval(() => {
+    focusRemaining--;
+    updateFocusDisplay();
+
+    if (focusRemaining <= 0) {
+      pauseFocus();
+      focusRemaining = 0;
+      updateFocusDisplay();
+      showToast("Focus session complete! Great work 🎉");
+
+      try {
+        if ("Notification" in window &&
+            Notification.permission === "granted") {
+          new Notification("NEBULYX Focus", {
+            body: "Your focus session is complete!"
+          });
+        }
+      } catch {}
+    }
+  }, 1000);
+
+  updateFocusDisplay();
+}
+
+function pauseFocus() {
+  focusRunning = false;
+
+  if (focusInterval) {
+    clearInterval(focusInterval);
+    focusInterval = null;
+  }
+
+  updateFocusDisplay();
+}
+
+function resetFocus() {
+  pauseFocus();
+
+  const minutes = Math.max(
+    1,
+    Math.min(180, Number($("focusMinutes")?.value) || 25)
+  );
+
+  focusRemaining = Math.round(minutes * 60);
+  updateFocusDisplay();
+  showToast("Timer reset.");
+}
+
+$("focusMinutes")?.addEventListener("change", () => {
+  if (!focusRunning) resetFocus();
+});
+
+updateFocusDisplay();
+
+/* ==========================================
+   RAINBOW COLOR LAB
+========================================== */
+
+const defaultPalette = [
+  "#ff005d", "#ff7a00", "#ffe600", "#00d084",
+  "#00c8ff", "#536dfe", "#a855f7", "#ff4fd8"
+];
+
+function generatePalette() {
+  const container = $("colorPalette");
+  if (!container) {
+    showToast("Color palette area nahi mila.");
+    return;
+  }
+
+  const colors = Array.from({ length: 8 }, (_, i) => {
+    const hue = Math.floor(Math.random() * 360);
+    return `hsl(${(hue + i * 23) % 360} 85% 58%)`;
+  });
+
+  container.innerHTML = colors.map(color => `
+    <button type="button"
+      title="Click to copy ${escapeHTML(color)}"
+      data-color="${escapeHTML(color)}"
+      style="height:90px;border:0;border-radius:12px;
+      background:${escapeHTML(color)};cursor:pointer;
+      color:white;font-weight:bold;text-shadow:0 1px 5px #000">
+      ${escapeHTML(color)}
+    </button>
+  `).join("");
+
+  container.querySelectorAll("[data-color]").forEach(button => {
+    button.addEventListener("click", () => {
+      copyText(button.dataset.color);
+    });
+  });
+
+  showToast("New rainbow palette generated!");
+}
+
+function copyPalette() {
+  const colors = $("colorPalette");
+  if (!colors) return;
+
+  const values = Array.from(
+    colors.querySelectorAll("[data-color]")
+  ).map(button => button.dataset.color);
+
+  copyText((values.length ? values : defaultPalette).join("\n"));
+}
+
+function updateGradient() {
+  const first = $("gradientOne")?.value || "#8b5cf6";
+  const second = $("gradientTwo")?.value || "#06b6d4";
+  const gradient = `linear-gradient(135deg, ${first}, ${second})`;
+
+  if ($("gradientPreview")) {
+    $("gradientPreview").style.background = gradient;
+  }
+
+  if ($("gradientCode")) {
+    $("gradientCode").textContent =
+      `background: ${gradient};`;
+  }
+}
+
+$("gradientOne")?.addEventListener("input", updateGradient);
+$("gradientTwo")?.addEventListener("input", updateGradient);
+
+function copyGradient() {
+  copyText($("gradientCode")?.textContent || "");
+}
+
+if ($("colorPalette")) {
+  $("colorPalette").innerHTML = defaultPalette.map(color => `
+    <button type="button"
+      title="Click to copy ${color}"
+      data-color="${color}"
+      style="height:90px;border:0;border-radius:12px;
+      background:${color};cursor:pointer;color:white;
+      font-weight:bold;text-shadow:0 1px 5px #000">${color}</button>
+  `).join("");
+
+  $("colorPalette").querySelectorAll("[data-color]").forEach(button => {
+    button.addEventListener("click", () => copyText(button.dataset.color));
+  });
+}
+
+updateGradient();
+
+/* ==========================================
+   PROMPT STUDIO
+========================================== */
+
+function createPrompt() {
+  const role = $("promptRole")?.value.trim() || "an expert assistant";
+  const goal = $("promptGoal")?.value.trim() || "help me solve a problem";
+  const style = $("promptStyle")?.value || "Clear and professional";
+  const format = $("promptFormat")?.value || "Structured response";
+
+  const prompt = `Act as ${role}.
+
+OBJECTIVE:
+${goal}
+
+STYLE:
+${style}
+
+OUTPUT FORMAT:
+${format}
+
+INSTRUCTIONS:
+- Understand the objective before answering.
+- Ask a clarifying question if essential information is missing.
+- Give practical, accurate and clearly organized results.
+- State assumptions and limitations instead of inventing facts.
+- Include an example or actionable next steps when useful.`;
+
+  if ($("promptResult")) {
+    $("promptResult").value = prompt;
+    $("promptResult").textContent = prompt;
+  }
+
+  showToast("Prompt generated!");
+}
+
+function copyPrompt() {
+  const result = $("promptResult");
+  copyText(result?.value || result?.textContent || "");
+}
+
+/* ==========================================
+   CODE PLAYGROUND
+========================================== */
+
+function previewCode() {
+  const editor = $("codeEditor");
+  const preview = $("codePreview");
+
+  if (!editor || !preview) {
+    showToast("Code editor ya preview element nahi mila.");
+    return;
+  }
+
+  // Runs the user's HTML in a sandboxed iframe.
+  let frame;
+
+  if (preview.tagName === "IFRAME") {
+    frame = preview;
+  } else {
+    frame = preview.querySelector("iframe");
+
+    if (!frame) {
+      preview.innerHTML = "";
+      frame = document.createElement("iframe");
+      frame.style.width = "100%";
+      frame.style.minHeight = "300px";
+      frame.style.border = "1px solid #888";
+      frame.style.borderRadius = "12px";
+      preview.appendChild(frame);
+    }
+  }
+
+  frame.setAttribute("sandbox", "allow-forms");
+  frame.srcdoc = editor.value;
+  showToast("Code preview updated.");
+}
+
+function downloadCode() {
+  downloadText(
+    "nebulux-code.html",
+    $("codeEditor")?.value || "",
+    "text/html;charset=utf-8"
+  );
+}
+
+function resetCode() {
+  if (!$("codeEditor")) return;
+
+  $("codeEditor").value =
+`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #101827;
+      color: white;
+    }
+    button {
+      padding: 10px 16px;
+      border: 0;
+      border-radius: 8px;
+      background: #8b5cf6;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello, NEBULYX!</h1>
+  <p>Edit this code and preview your page.</p>
+  <button onclick="document.querySelector('p').textContent='It works!'">
+    Test button
+  </button>
+</body>
+</html>`;
+
+  previewCode();
+}
+
+if ($("codeEditor") && !$("codeEditor").value.trim()) {
+  resetCode();
+}
+
+/* ==========================================
+   CALCULATOR
+========================================== */
+
+let calculatorExpression = "";
+
+function renderCalculator() {
+  const display = $("calcDisplay");
+  if (display) display.value = calculatorExpression || "0";
+}
+
+function calculateExpression(expression) {
+  const cleaned = expression.replace(/\s+/g, "");
+
+  // Only permit arithmetic characters.
+  if (!cleaned || !/^[0-9+\-*/().%]+$/.test(cleaned)) {
+    throw new Error("Invalid expression");
+  }
+
+  // Convert percentage to decimal.
+  const normalized = cleaned.replace(
+    /(\d+(?:\.\d+)?)%/g,
+    "($1/100)"
+  );
+
+  // Recursive-descent parser: no eval() or Function().
+  let pos = 0;
+
+  function parseExpression() {
+    let value = parseTerm();
+
+    while (pos < normalized.length) {
+      const op = normalized[pos];
+
+      if (op !== "+" && op !== "-") break;
+      pos++;
+
+      const right = parseTerm();
+      value = op === "+" ? value + right : value - right;
+    }
+
+    return value;
+  }
+
+  function parseTerm() {
+    let value = parseFactor();
+
+    while (pos < normalized.length) {
+      const op = normalized[pos];
+
+      if (op !== "*" && op !== "/") break;
+      pos++;
+
+      const right = parseFactor();
+
+      if (op === "/" && right === 0) {
+        throw new Error("Division by zero");
+      }
+
+      value = op === "*" ? value * right : value / right;
+    }
+
+    return value;
+  }
+
+  function parseFactor() {
+    if (normalized[pos] === "+") {
+      pos++;
+      return parseFactor();
+    }
+
+    if (normalized[pos] === "-") {
+      pos++;
+      return -parseFactor();
+    }
+
+    if (normalized[pos] === "(") {
+      pos++;
+      const value = parseExpression();
+
+      if (normalized[pos] !== ")") {
+        throw new Error("Missing closing bracket");
+      }
+
+      pos++;
+      return value;
+    }
+
+    const match = normalized.slice(pos).match(
+      /^(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?/i
+    );
+
+    if (!match) throw new Error("Invalid number");
+
+    pos += match[0].length;
+    return Number(match[0]);
+  }
+
+  const result = parseExpression();
+
+  if (pos !== normalized.length || !Number.isFinite(result)) {
+    throw new Error("Invalid expression");
+  }
+
+  return result;
+}
+
+function calculatorPress(value) {
+  if (value === "AC" || value === "C") {
+    calculatorExpression = "";
+  } else if (value === "DEL") {
+    calculatorExpression = calculatorExpression.slice(0, -1);
+  } else if (value === "=") {
+    try {
+      calculatorExpression = String(
+        calculateExpression(calculatorExpression)
+      );
+    } catch {
+      calculatorExpression = "";
+      showToast("Expression sahi nahi hai.");
+    }
+  } else if (/^[0-9+\-*/().%]$/.test(value)) {
+    calculatorExpression += value;
+  }
+
+  renderCalculator();
+}
+
+if ($("calcButtons")) {
+  const buttons = [
+    "AC", "(", ")", "DEL",
+    "7", "8", "9", "/",
+    "4", "5", "6", "*",
+    "1", "2", "3", "-",
+    "0", ".", "%", "+",
+    "="
+  ];
+
+  $("calcButtons").innerHTML = buttons.map(value => `
+    <button type="button"
+      class="calc-button"
+      data-calc="${escapeHTML(value)}">${escapeHTML(value)}</button>
+  `).join("");
+
+  $("calcButtons").querySelectorAll("[data-calc]").forEach(button => {
+    button.addEventListener("click", () => {
+      calculatorPress(button.dataset.calc);
+    });
+  });
+}
+
+renderCalculator();
+
+/* ==========================================
+   HABIT TRACKER
+========================================== */
+
+function addHabit() {
+  const input = $("habitName");
+  const name = input?.value.trim();
+
+  if (!name) {
+    showToast("Habit ka naam likho.");
+    input?.focus();
+    return;
+  }
+
+  appData.habits.unshift({
+    id: makeId(),
+    name,
+    completedDates: [],
+    createdAt: new Date().toISOString()
+  });
+
+  saveData();
+  input.value = "";
+  renderHabits();
+  updateDashboard();
+  showToast("Habit add ho gayi!");
+}
+
+function toggleHabit(id) {
+  const habit = appData.habits.find(h => h.id === id);
+  if (!habit) return;
+
+  const today = new Date().toISOString().slice(0, 10);
+  const dates = habit.completedDates || [];
+
+  habit.completedDates = dates.includes(today)
+    ? dates.filter(date => date !== today)
+    : [...dates, today];
+
+  saveData();
+  renderHabits();
+  updateDashboard();
+}
+
+function deleteHabit(id) {
+  appData.habits = appData.habits.filter(h => h.id !== id);
+  saveData();
+  renderHabits();
+  updateDashboard();
+  showToast("Habit delete ho gayi.");
+}
+
+function renderHabits() {
+  const list = $("habitList");
+  if (!list) return;
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  if (!appData.habits.length) {
+    list.innerHTML =
+      '<div class="empty-state">Apni pehli daily habit add karo.</div>';
+    return;
+  }
+
+  list.innerHTML = appData.habits.map(habit => {
+    const done = (habit.completedDates || []).includes(today);
+
+    return `
+      <article class="item-card">
+        <input type="checkbox"
+          aria-label="Mark habit complete today"
+          data-habit-toggle="${escapeHTML(habit.id)}"
+          ${done ? "checked" : ""}>
+        <div class="item-main">
+          <h3>${escapeHTML(habit.name)}</h3>
+          <p>${done ? "Completed today ✓" : "Not completed today yet"}</p>
+          <small>${(habit.completedDates || []).length} total check-ins</small>
+        </div>
+        <button type="button" class="btn btn-danger"
+          data-habit-delete="${escapeHTML(habit.id)}">Delete</button>
+      </article>
+    `;
+  }).join("");
+
+  list.querySelectorAll("[data-habit-toggle]").forEach(input => {
+    input.addEventListener("change", () => {
+      toggleHabit(input.dataset.habitToggle);
+    });
+  });
+
+  list.querySelectorAll("[data-habit-delete]").forEach(button => {
+    button.addEventListener("click", () => {
+      deleteHabit(button.dataset.habitDelete);
+    });
+  });
+}
+
+$("habitName")?.addEventListener("keydown", event => {
+  if (event.key === "Enter") addHabit();
+});
+
+/* ==========================================
+   DAILY JOURNAL
+========================================== */
+
+function saveJournal() {
+  const mood = $("journalMood")?.value || "Okay";
+  const content = $("journalText")?.value.trim();
+
+  if (!content) {
+    showToast("Journal mein kuch likho.");
+    $("journalText")?.focus();
+    return;
+  }
+
+  const today = new Date().toISOString().slice(0, 10);
+  const existing = appData.journal.find(entry => entry.date === today);
+
+  if (existing) {
+    existing.mood = mood;
+    existing.content = content;
+    existing.updatedAt = new Date().toISOString();
+  } else {
+    appData.journal.unshift({
+      id: makeId(),
+      date: today,
+      mood,
+      content,
+      createdAt: new Date().toISOString()
+    });
+  }
+
+  saveData();
+  renderJournal();
+  updateDashboard();
+  showToast("Journal save ho gaya!");
+}
+
+function deleteJournal(id) {
+  appData.journal = appData.journal.filter(entry => entry.id !== id);
+  saveData();
+  renderJournal();
+  showToast("Journal entry delete ho gayi.");
+}
+
+function renderJournal() {
+  const list = $("journalList");
+  if (!list) return;
+
+  if (!appData.journal.length) {
+    list.innerHTML =
+      '<div class="empty-state">Tumhari journal entries yahan nazar aayengi.</div>';
+    return;
+  }
+
+  list.innerHTML = appData.journal.map(entry => `
+    <article class="item-card">
+      <div class="item-main">
+        <h3>${escapeHTML(entry.date)} · ${escapeHTML(entry.mood)}</h3>
+        <p class="note-content">${escapeHTML(entry.content)}</p>
+      </div>
+      <button type="button" class="btn btn-danger"
+        data-journal-delete="${escapeHTML(entry.id)}">Delete</button>
+    </article>
+  `).join("");
+
+  list.querySelectorAll("[data-journal-delete]").forEach(button => {
+    button.addEventListener("click", () => {
+      deleteJournal(button.dataset.journalDelete);
+    });
+  });
+}
+
+/* ==========================================
+   SETTINGS AND DATA EXPORT
+========================================== */
+
+function exportData() {
+  const exportObject = {
+    app: "NEBULYX",
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    data: appData
+  };
+
+  downloadText(
+    "nebulux-backup.json",
+    JSON.stringify(exportObject, null, 2),
+    "application/json;charset=utf-8"
+  );
+
+  showToast("Backup download start ho gaya.");
+}
+
+function clearWorkspace() {
+  const confirmed = confirm(
+    "Kya tum waqai apne tamam NEBULYX projects, tasks, notes, habits aur journal entries delete karna chahte ho? Pehle backup export kar lena."
+  );
+
+  if (!confirmed) return;
+
+  appData = {
+    ...defaultData,
+    projects: [],
+    tasks: [],
+    notes: [],
+    habits: [],
+    journal: [],
+    theme: appData.theme || "dark"
+  };
+
+  saveData();
+
+  renderProjects();
+  renderTasks();
+  renderNotes();
+  renderHabits();
+  renderJournal();
+  updateDashboard();
+
+  showToast("Workspace clear ho gaya.");
+}
+
+/* ==========================================
+   KEYBOARD SHORTCUTS
+========================================== */
+
+document.addEventListener("keydown", event => {
+  const target = event.target;
+  const typing = target &&
+    (target.matches("input, textarea, select") ||
+     target.isContentEditable);
+
+  if (event.altKey && !event.ctrlKey && !event.metaKey) {
+    const shortcuts = {
+      "1": "home",
+      "2": "projects",
+      "3": "tasks",
+      "4": "notes",
+      "5": "focus"
+    };
+
+    if (shortcuts[event.key]) {
+      event.preventDefault();
+      showPage(shortcuts[event.key]);
+    }
+  }
+
+  if (!typing && event.key === "Escape") {
+    showPage("home");
+  }
+});
+
+/* ==========================================
+   FINAL INITIALIZATION
+========================================== */
+
+function initializePartThree() {
+  renderProjects();
+  renderTasks();
+  renderNotes();
+  renderHabits();
+  renderJournal();
+  updateDashboard();
+  updateGradient();
+  renderCalculator();
+  updateFocusDisplay();
+
+  const hashPage = location.hash.slice(1);
+
+  if (hashPage && $("page-" + hashPage)) {
+    showPage(hashPage);
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializePartThree);
+} else {
+  initializePartThree();
+}
+
+</script>
+</body>
+</html>
